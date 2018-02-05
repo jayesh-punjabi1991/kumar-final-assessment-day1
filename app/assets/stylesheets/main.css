@@ -185,5 +185,22 @@ h1 {
 /*************************************** 
  * Tomato Announcements Feed
  **************************************/
+.center_text {
+	text-align: center;
+}
 
- /* Add Code Here */
+.announcements_table_fixed {
+	table-layout: fixed;
+}
+
+.announcements_table_header {
+	display: block;
+	position: relative;
+}
+
+.announcements_table_body {
+	overflow: auto;
+	display: block;
+	height: 500px;
+}
+
