@@ -28,7 +28,7 @@
         var vm = this;
         vm.filteredData = [];
         vm.searchText = "";
-        vm.maxPerPage = 15;
+        vm.filterDataByType = filterDataByType;
 
         activate();
 
@@ -38,8 +38,15 @@
 
         function getFilteredData(announcementsData, ownersData) {
             vm.filteredData = tomatoAnnouncementsFeedService.getOwnerInfo(announcementsData, ownersData);
+            vm.dataFinal = vm.filteredData;
+            vm.Types = _.uniq(_(vm.filteredData).map('Type.Title').value());
+            vm.Types.unshift('All');
+            vm.selectedType = vm.Types[0];
         }
 
+        function filterDataByType(){
+            vm.filteredData = tomatoAnnouncementsFeedService.filterDataByType(vm.selectedType, vm.filteredData, vm.dataFinal);
+        }
     }
  })();
  

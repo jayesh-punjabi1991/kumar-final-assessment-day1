@@ -1,7 +1,7 @@
 <!-- Add your code here, create additional directives if needed. -->
 <div class="panel panel-default">
     <div class="panel-body">
-        <div class="tomato-grid-panel__search-bar input-group col-sm-4">
+        <div class="tomato-grid-panel__search-bar search input-group col-sm-4 ">
             <input type="text" class="form-control" placeholder="Search..." ng-model="vm.searchText">
             <span class="input-group-btn">
                 <button class="btn btn-default" type="button"> 
@@ -9,9 +9,11 @@
                 </button>
             </span>
         </div>
-        <!--<div class="tomato-grid-panel__pagination">
-            <dir-pagination-controls></dir-pagination-controls>
-        </div>-->
+        <div class="tomato-grid-panel__search-bar input-group col-sm-offset-5 col-sm-3">            
+            <div class="filterLabel">Type : &nbsp;&nbsp;</div>
+            <select class="form-control typeFilter" ng-model="vm.selectedType" ng-options="x for x in vm.Types" ng-change="vm.filterDataByType()">
+            </select>            
+        </div>
     </div>
     <table class="table table-striped table-responsive table-hover announcements_table_fixed">
         <thead class="thead-default">
@@ -23,9 +25,9 @@
             </tr>
         </thead>
         <tbody class="announcements_table_body">
-            <tr ng-repeat="announcement in vm.filteredData | filter: vm.searchText">
+            <tr ng-repeat="announcement in vm.filteredData | filter: vm.searchText | orderBy:['-Date']">
                 <td class="col-md-5">{{announcement.Title}}</td>
-                <td class="col-md-3">{{announcement.Date | date: 'M/d/yyyy'}}</td>
+                <td class="col-md-3">{{announcement.Date | date: 'MMM.dd, yyyy'}}</td>
                 <td class="col-md-2">
                     <span class="{{announcement.Type.Icon}}" title="{{announcement.Type.Title}}"></span>
                 </td>

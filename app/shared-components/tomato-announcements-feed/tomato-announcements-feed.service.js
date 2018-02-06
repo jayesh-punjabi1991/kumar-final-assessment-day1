@@ -10,7 +10,8 @@
 
     function tomatoAnnouncementsFeedService() {
         var service = {
-            getOwnerInfo: getOwnerInfo
+            getOwnerInfo: getOwnerInfo,
+            filterDataByType: filterDataByType
         };
 
         return service; 
@@ -21,6 +22,17 @@
             }).value();
             
             return announcementsData;
+        }
+
+        function filterDataByType(itemTitle, filteredData, completeData) {
+            if(itemTitle == 'All') {
+                filteredData = completeData;
+            }
+            else {
+                filteredData = completeData;
+                filteredData = _(filteredData).filter({ Type: { Title: itemTitle } }).value();
+            }            
+            return filteredData;
         }
     }
 })();
